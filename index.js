@@ -56,15 +56,18 @@ var exportObj = function(options) {
 			}.bind(this)
 		));
 		
-		// apply source map to the chain
-		//if (file.sourceMap) {
-		 //     applySourceMap(file, file.map);
-		//}
+		
 
 		if (file.isStream()) {
 			var newContents = through2();
 			piped.pipe(newContents);
 			file.contents = newContents;
+			
+			// apply source map to the chain
+				console.log(file);
+			if (file.sourceMap) {
+			      applySourceMap(file, file.map);
+			}
 		}
 	});
 };
