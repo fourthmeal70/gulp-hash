@@ -18,6 +18,8 @@ var exportObj = function(options) {
 
 	return through2.obj(function(file, enc, cb) {
 		// generate source maps if plugin source-map present
+		console.log("file Has sourcemap: " + file.sourceMap);
+		console.log("file Has map: " + file.map);
 		if (file.sourceMap) {
 			options.makeSourceMaps = true;
 		}
