@@ -38,7 +38,7 @@ var exportObj = function(options) {
 				hasher.update(chunk);
 				updateCb(null, chunk);
 			},
-
+			
 			function(flushCb) {
 				if (options.version !== '') hasher.update(String(options.version));
 				file.hash = hasher.digest('hex').slice(0, options.hashLength);
@@ -56,9 +56,11 @@ var exportObj = function(options) {
 			}.bind(this)
 		));
 		
-		
-
+		console.log("testing...");
+		console.log(file);
+		console.log(file.isStream());
 		if (file.isStream()) {
+			console.log("it's a stream...");
 			var newContents = through2();
 			piped.pipe(newContents);
 			file.contents = newContents;
