@@ -18,9 +18,9 @@ var exportObj = function(options) {
 
 	return through2.obj(function(file, enc, cb) {
 		// generate source maps if plugin source-map present
-		if (file.sourceMap) {
-			options.makeSourceMaps = true;
-		}
+		//if (file.sourceMap) {
+		//	options.makeSourceMaps = true;
+		//}
 		
 		if (file.isDirectory()) {
 			this.push(file);
@@ -51,9 +51,9 @@ var exportObj = function(options) {
 				}));
 				
 				// apply source map to the chain
-				if (file.sourceMap) {
-				      applySourceMap(file, file.map);
-				}
+				//if (file.sourceMap) {
+				//      applySourceMap(file, file.map);
+				//}
 
 				this.push(file);
 				cb();
