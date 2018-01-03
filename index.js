@@ -55,6 +55,7 @@ var exportObj = function(options) {
 				// apply source map to the chain
 				//console.log(file);
 				if (file.sourceMap) {
+					console.log("file has sourceMap");
 			      		applySourceMap(file, file.sourceMap);
 				}
 				
@@ -64,11 +65,8 @@ var exportObj = function(options) {
 			}.bind(this)
 		));
 		
-		console.log("testing...");
-		console.log(file);
-		console.log(file.isStream());
+		
 		if (file.isStream()) {
-			console.log("it's a stream...");
 			var newContents = through2();
 			piped.pipe(newContents);
 			file.contents = newContents;
