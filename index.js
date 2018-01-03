@@ -52,6 +52,12 @@ var exportObj = function(options) {
 					ext: fileExt
 				}));
 				
+				// apply source map to the chain
+				//console.log(file);
+				if (file.sourceMap) {
+			      		applySourceMap(file, file.sourceMap);
+				}
+				
 				this.push(file);
 				cb();
 				flushCb();
@@ -66,12 +72,6 @@ var exportObj = function(options) {
 			var newContents = through2();
 			piped.pipe(newContents);
 			file.contents = newContents;
-			
-			// apply source map to the chain
-				console.log(file);
-			if (file.sourceMap) {
-			      applySourceMap(file, file.map);
-			}
 		}
 	});
 };
