@@ -5,7 +5,8 @@ var crypto = require('crypto'),
     template = require('lodash.template'),
     path = require('path'),
     Promise = require('es6-promise').Promise,
-    fs = require('fs');
+    fs = require('fs'),
+    applySourceMap = require('vinyl-sourcemaps-apply');
 
 var exportObj = function(options) {
 	options = assign({}, {
@@ -16,6 +17,11 @@ var exportObj = function(options) {
 	}, options);
 
 	return through2.obj(function(file, enc, cb) {
+		// generate source maps if plugin source-map present
+		if (file.sourceMap) {
+			options.makeSourceMaps = true;
+		}
+		
 		if (file.isDirectory()) {
 			this.push(file);
 			cb();
@@ -43,6 +49,11 @@ var exportObj = function(options) {
 					name: fileName,
 					ext: fileExt
 				}));
+				
+				// apply source map to the chain
+				if (file.sourceMap) {
+				      applySourceMap(file, file.map);
+				}
 
 				this.push(file);
 				cb();
