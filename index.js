@@ -57,9 +57,9 @@ var exportObj = function(options) {
 		));
 		
 		// apply source map to the chain
-		if (file.sourceMap) {
-		      applySourceMap(file, file.map);
-		}
+		//if (file.sourceMap) {
+		 //     applySourceMap(file, file.map);
+		//}
 
 		if (file.isStream()) {
 			var newContents = through2();
